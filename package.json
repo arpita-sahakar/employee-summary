@@ -1,0 +1,24 @@
+{
+  "name": "employee-summary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arpita-sahakar/employee-summary.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arpita-sahakar/employee-summary/issues"
+  },
+  "homepage": "https://github.com/arpita-sahakar/employee-summary#readme"
+}

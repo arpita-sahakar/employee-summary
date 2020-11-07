@@ -10,9 +10,133 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+
+
+
+const managerQues = [
+  {
+    type: "input",
+    message: "Enter Manager's name",
+    name: "employeeName",
+  },
+  {
+    type: "input",
+    message: "Enter Manager's email",
+    name: "email",
+  },
+  {
+    type: "number",
+    message: "Enter officeNumber",
+    name: "officeNumber",
+  },
+  {
+    type: "list",
+    message: "Add team members",
+    name: "temMemType",
+    choices: ["None", "Intern", "Engineer"],
+  },
+];
+
+const engineerQues = [
+  {
+    type: "input",
+    message: "Enter Engineer's name",
+    name: "employeeName",
+  },
+  {
+    type: "input",
+    message: "Enter Engineer's email",
+    name: "email",
+  },
+  {
+    type: "input",
+    message: "Enter github user-name",
+    name: "gitHubUserName",
+  },
+  {
+    type: "list",
+    message: "Add team members",
+    name: "temMemType",
+    choices: ["None", "Intern", "Engineer"],
+  },
+];
+
+const internQues = [
+  {
+    type: "input",
+    message: "Enter Intern's name",
+    name: "employeeName",
+  },
+  {
+    type: "input",
+    message: "Enter Intern's email",
+    name: "email",
+  },
+  {
+    type: "input",
+    message: "Enter school name",
+    name: "schoolName",
+  },
+
+  {
+    type: "list",
+    message: "Add team members",
+    name: "temMemType",
+    choices: ["None", "Intern", "Engineer"],
+  },
+];
+
+const teamArray = [];
+let id = 1;
+const getEmployeeDetails = (questions, flag) => {
+  inquirer.prompt(questions).then((answer) => {
+    // create manager object using constructor and push in the team array
+    if (flag === "m") {
+      let manager = new Manager(
+        answer.employeeName,
+        id++,
+        answer.email,
+        answer.officeNumber
+      );
+      teamArray.push(manager);
+    } else if (flag === "i") {
+      let intern = new Intern(
+        answer.employeeName,
+        id++,
+        answer.email,
+        answer.schoolName
+      );
+      teamArray.push(intern);
+    } else if (flag === "e") {
+      let engineer = new Engineer(
+        answer.employeeName,
+        id++,
+        answer.email,
+        answer.gitHubUserName
+      );
+      teamArray.push(engineer);
+    }
+    if (answer.temMemType === "Intern") {
+      getEmployeeDetails(internQues, "i");
+    } else if (answer.temMemType === "Engineer") {
+      getEmployeeDetails(engineerQues, "e");
+    }else{
+        const renderResp = render(teamArray);
+        fs.writeFile("team.html",renderResp,err=>{
+            err?console.error(err):console.log("success");
+        })
+    }
+ 
+  });
+};
+
+getEmployeeDetails(managerQues, "m");
+
+// call "getEmployeeDetails" for "manager question" and create manager object then push it to team array.
+
+// getEmployeeDetails(internQues);
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

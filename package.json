@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/arpita-sahakar/employee-summary/issues"
   },
-  "homepage": "https://github.com/arpita-sahakar/employee-summary#readme"
+  "homepage": "https://github.com/arpita-sahakar/employee-summary#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
 }

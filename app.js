@@ -4,6 +4,7 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const { managerQues, engineerQues, internQues } = require("./lib/questions");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -12,81 +13,6 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-
-
-
-const managerQues = [
-  {
-    type: "input",
-    message: "Enter Manager's name",
-    name: "employeeName",
-  },
-  {
-    type: "input",
-    message: "Enter Manager's email",
-    name: "email",
-  },
-  {
-    type: "number",
-    message: "Enter officeNumber",
-    name: "officeNumber",
-  },
-  {
-    type: "list",
-    message: "Add team members",
-    name: "temMemType",
-    choices: ["None", "Intern", "Engineer"],
-  },
-];
-
-const engineerQues = [
-  {
-    type: "input",
-    message: "Enter Engineer's name",
-    name: "employeeName",
-  },
-  {
-    type: "input",
-    message: "Enter Engineer's email",
-    name: "email",
-  },
-  {
-    type: "input",
-    message: "Enter github user-name",
-    name: "gitHubUserName",
-  },
-  {
-    type: "list",
-    message: "Add team members",
-    name: "temMemType",
-    choices: ["None", "Intern", "Engineer"],
-  },
-];
-
-const internQues = [
-  {
-    type: "input",
-    message: "Enter Intern's name",
-    name: "employeeName",
-  },
-  {
-    type: "input",
-    message: "Enter Intern's email",
-    name: "email",
-  },
-  {
-    type: "input",
-    message: "Enter school name",
-    name: "schoolName",
-  },
-
-  {
-    type: "list",
-    message: "Add team members",
-    name: "temMemType",
-    choices: ["None", "Intern", "Engineer"],
-  },
-];
 
 const teamArray = [];
 let id = 1;
@@ -122,13 +48,12 @@ const getEmployeeDetails = (questions, flag) => {
       getEmployeeDetails(internQues, "i");
     } else if (answer.temMemType === "Engineer") {
       getEmployeeDetails(engineerQues, "e");
-    }else{
-        const renderResp = render(teamArray);
-        fs.writeFile("team.html",renderResp,err=>{
-            err?console.error(err):console.log("success");
-        })
+    } else {
+      const renderResp = render(teamArray);
+      fs.writeFile(outputPath, renderResp, (err) => {
+        err ? console.error(err) : console.log("success");
+      });
     }
- 
   });
 };
 

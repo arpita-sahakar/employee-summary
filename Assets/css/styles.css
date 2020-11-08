@@ -1,4 +1,22 @@
 .team-heading{
     background-image:linear-gradient(to right, rgb(37, 117, 152), rgb(208, 223, 7));
-    color : white;
+    
+}
+
+.employee-card{
+    margin: 5px;
+    width: 18rem;
+}
+
+.card-header{
+    background-color: rgb(80, 148, 177);
+}
+
+.card-body{
+    background-color: rgb(233, 217, 217);
+
+}
+
+.list-group{
+    font-weight: 500;
 }
